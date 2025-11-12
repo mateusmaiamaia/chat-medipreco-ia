@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Header from './components/Header';
 import ChatWindow from './components/ChatWindow';
 import InputBar from './components/InputBar';
-import { getGeminiResponse } from './api/geminiApi';
 
 function App() {
   const [messages, setMessages] = useState([
@@ -12,19 +11,36 @@ function App() {
 
   const handleSendMessage = async (userInput) => {
     const userMessage = { sender: 'user', text: userInput };
+    const history = messages.slice(1);
+    
     setMessages(prevMessages => [...prevMessages, userMessage]);
-
     setIsLoading(true);
 
     try {
-      const history = messages.slice(1);
-      const iaResponseText = await getGeminiResponse(userInput, history); 
-      const iaMessage = { sender: 'ia', text: iaResponseText };
+      const API_URL = 'http://localhost:3001/api/chat';
+
+      const response = await fetch(API_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          userInput: userInput,
+          chatHistory: history
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Erro ao conectar com o backend.');
+      }
+
+      const data = await response.json();
+      const iaMessage = { sender: 'ia', text: data.response };
       setMessages(prevMessages => [...prevMessages, iaMessage]);
 
     } catch (error) {
       console.error("Erro ao enviar mensagem:", error);
-      const errorMessage = { sender: 'ia', text: 'Desculpe, algo deu errado.' };
+      const errorMessage = { sender: 'ia', text: 'Desculpe, algo deu errado ao conectar.' };
       setMessages(prevMessages => [...prevMessages, errorMessage]);
     }
 
