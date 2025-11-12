@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+import ReactMarkdown from 'react-markdown'; 
 
 function ChatWindow({ messages, isLoading }) {
   const messagesEndRef = useRef(null);
@@ -12,7 +13,11 @@ function ChatWindow({ messages, isLoading }) {
       <div className="messages-list">
         {messages.map((msg, index) => (
           <div key={index} className={`message-bubble ${msg.sender}`}>
-            <p>{msg.text}</p>
+            {msg.sender === 'ia' ? (
+              <ReactMarkdown>{msg.text}</ReactMarkdown>
+            ) : (
+              <p>{msg.text}</p>
+            )}
           </div>
         ))}
         
