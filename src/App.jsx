@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Header from './components/Header';
 import ChatWindow from './components/ChatWindow';
 import InputBar from './components/InputBar';
 import { getGeminiResponse } from './api/geminiApi';
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <div className="chat-container">
+      <Header />
       <ChatWindow messages={messages} isLoading={isLoading} />
       <InputBar onSendMessage={handleSendMessage} isLoading={isLoading} />
     </div>
