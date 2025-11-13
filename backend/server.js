@@ -6,7 +6,7 @@ import sqlite3 from 'sqlite3';
 import bcrypt from 'bcryptjs';
 import jwt from 'jsonwebtoken';
 
-const dbPath = './chat.db';
+const dbPath = "/app/chat.db";
 const db = new sqlite3.Database(dbPath, (err) => {
   if (err) {
     console.error("Erro ao conectar ao DB:", err.message);

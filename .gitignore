@@ -7,28 +7,29 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-node_modules
-dist
-dist-ssr
-*.local
-
-# Editor directories and files
+# OS & Editor specific
+.DS_Store
+.idea
 .vscode/*
 !.vscode/extensions.json
-.idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
-\n# Backend dependencies and secrets\nbackend/node_modules\nbackend/.env
+*.local
 
+# Artefatos de build da Raiz (o que estava faltando)
+node_modules/
+dist/
+dist-ssr/
+
+# Frontend (Vite)
 frontend/node_modules/
-backend/node_modules/
-
-backend/.env
-
-backend/chat.db
-
 frontend/dist/
+frontend/dist-ssr/
+
+# Backend (Node.js)
+backend/node_modules/
+backend/.env
+backend/chat.db

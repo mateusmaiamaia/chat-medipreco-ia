@@ -9,7 +9,7 @@ backend/node_modules
 # Secrets
 backend/.env
 
-# DB (O compose vai lidar com isso)
+# DB
 backend/chat.db
 
 # Build
