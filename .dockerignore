@@ -1,0 +1,16 @@
+# Git
+.git
+.gitignore
+
+# Node Modules
+frontend/node_modules
+backend/node_modules
+
+# Secrets
+backend/.env
+
+# DB (O compose vai lidar com isso)
+backend/chat.db
+
+# Build
+frontend/dist

@@ -23,3 +23,12 @@ dist-ssr
 *.sln
 *.sw?
 \n# Backend dependencies and secrets\nbackend/node_modules\nbackend/.env
+
+frontend/node_modules/
+backend/node_modules/
+
+backend/.env
+
+backend/chat.db
+
+frontend/dist/
