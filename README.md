@@ -46,9 +46,9 @@ Na **pasta raiz** do projeto (`chat-medipreco-ia/`), execute o seguinte comando:
 
 ```bash
 docker-compose up --build
+```
 
-```md
-## 🛠️ Como Executar Localmente (Método Manual)
+##  Como Executar Localmente (Método Manual)
 
 Se preferir rodar os serviços manualmente sem o Docker.
 
