@@ -8,7 +8,7 @@ const genAI = new GoogleGenerativeAI(API_KEY);
 
 export async function getGeminiResponse(userInput, chatHistory) {
   
-  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+  const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash-lite" });
 
   const systemInstruction = `
     Você é um assistente de atendimento da Medipreço.
