@@ -19,7 +19,10 @@ function App() {
   const [error, setError] = useState("");
 
   const getWelcomeMessage = () => {
-    return { sender: 'ia', text: `Olá, ${userName}! Eu sou o assistente da Medipreço. Como posso ajudar você hoje?` };
+    return { 
+      sender: 'ia', 
+      text: `Olá, ${userName}! Eu sou o assistente virtual da Medipreço.\n\n**Atenção:** Eu fui treinado para responder **apenas sobre os produtos e serviços da Medipreço**. Eu não sou um médico e não posso prescrever receitas ou dar diagnósticos, ok? \n\nPara começar, você pode me perguntar sobre:\n* Como funciona o **subsídio**\n* Nossos **planos** (Medi 45, 90, etc.)\n* O que são os **Smart Lockers**`
+    };
   };
 
   const authFetch = async (url, options = {}) => {

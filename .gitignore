@@ -7,7 +7,6 @@ yarn-error.log*
 pnpm-debug.log*
 lerna-debug.log*
 
-# OS & Editor specific
 .DS_Store
 .idea
 .vscode/*
@@ -19,17 +18,14 @@ lerna-debug.log*
 *.sw?
 *.local
 
-# Artefatos de build da Raiz (o que estava faltando)
 node_modules/
 dist/
 dist-ssr/
 
-# Frontend (Vite)
 frontend/node_modules/
 frontend/dist/
 frontend/dist-ssr/
 
-# Backend (Node.js)
 backend/node_modules/
 backend/.env
-backend/chat.db
+backend/data/

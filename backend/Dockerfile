@@ -1,4 +1,4 @@
-FROM node:20-bullseye
+FROM node:20-alpine
 
 WORKDIR /app
 
@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["npm", "start"]
+CMD ["node", "server.js"]

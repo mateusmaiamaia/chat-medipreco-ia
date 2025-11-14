@@ -11,6 +11,7 @@ backend/.env
 
 # DB
 backend/chat.db
+backend/data/
 
 # Build
 frontend/dist
