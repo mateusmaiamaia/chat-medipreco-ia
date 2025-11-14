@@ -4,14 +4,14 @@ Este é um projeto full-stack de chatbot funcional desenvolvido como parte do ca
 
 O projeto utiliza uma arquitetura React (Frontend) + Node.js (Backend) com um banco de dados PostgreSQL para persistência de dados e autenticação de usuário.
 
-##  Funcionalidades Principais
+##  Destaques do Projeto
 
 - **Arquitetura Full-Stack:** Frontend (React) desacoplado do Backend (Node.js).  
 - **Segurança:** A chave da API do Gemini é 100% segura no backend, protegida por um arquivo `.env`.  
 - **Autenticação de Usuário:** Sistema completo de Registro e Login (Email/Senha/Nome) com persistência de sessão (JWT).  
 - **CRUD por Usuário:** O histórico do chat é salvo e carregado por usuário, persistindo no banco de dados (PostgreSQL).  
 - **Banco de Dados Auto-Suficiente:** O banco de dados se inicializa automaticamente na primeira vez que o servidor é executado, criando as tabelas e um usuário de teste.  
-- **Agente de IA (Gemini):** A IA responde estritamente com base em uma base de conhecimento curada e inclui um disclaimer de segurança (não é um médico).  
+- **Agente de IA (Gemini):** A IA responde estritamente com base em uma base de conhecimento curada.  
 - **UI/UX:** Interface limpa, responsiva, formatada em Markdown e alinhada à identidade visual da Medipreço.  
 - **Portabilidade:** A aplicação é totalmente "dockerizada" e pode ser iniciada com um único comando.
 

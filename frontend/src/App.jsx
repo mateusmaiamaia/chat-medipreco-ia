@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Header from './components/Header';
 import ChatWindow from './components/ChatWindow';
 import InputBar from './components/InputBar';
+import SuggestionChips from './components/SuggestionChips';
 
 const API_URL = '/api';
 
@@ -18,11 +19,18 @@ function App() {
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
+  
+  const [showSuggestions, setShowSuggestions] = useState(false);
+  const suggestionTopics = [
+    "Quais são os planos?", 
+    "Como funciona o subsídio?", 
+    "O que são Smart Lockers?"
+  ];
 
   const getWelcomeMessage = () => {
     return { 
       sender: 'ia', 
-      text: `Olá, ${userName}! Eu sou o assistente virtual da Medipreço.\n\n**Atenção:** Eu fui treinado para responder **apenas sobre os produtos e serviços da Medipreço**. Eu não sou um médico e não posso prescrever receitas ou dar diagnósticos, ok? \n\nPara começar, você pode me perguntar sobre:\n* Como funciona o **subsídio**\n* Nossos **planos** (Medi 45, 90, etc.)\n* O que são os **Smart Lockers**`
+      text: `Olá, ${userName}! Eu sou o assistente virtual da Medipreço e estou aqui para te ajudar a entender nossos processos. Como posso te ajudar hoje?`
     };
   };
 
@@ -59,15 +67,15 @@ function App() {
           throw new Error('Erro ao buscar histórico.');
         }
         const history = await response.json();
+        const welcomeMsg = getWelcomeMessage();
         
-        if (history.length === 0) {
-          setMessages([getWelcomeMessage()]);
-        } else {
-          setMessages(history);
-        }
+        setMessages([...history, welcomeMsg]);
+        setShowSuggestions(false);
+        
       } catch (error) {
         console.error("Erro ao carregar histórico:", error);
         setMessages([getWelcomeMessage()]);
+        setShowSuggestions(true);
       }
       setIsLoading(false);
     };
@@ -76,6 +84,7 @@ function App() {
   }, [token, userName]);
 
   const handleSendMessage = async (userInput) => {
+    setShowSuggestions(false);
     const userMessage = { sender: 'user', text: userInput };
     const history = messages.length > 1 ? messages.slice(1) : [];
     
@@ -97,6 +106,11 @@ function App() {
 
       const data = await response.json();
       const iaMessage = { sender: 'ia', text: data.response };
+      
+      if (iaMessage.text.startsWith("Puxa, essa informação")) {
+        setShowSuggestions(true);
+      }
+      
       setMessages(prevMessages => [...prevMessages, iaMessage]);
 
     } catch (error) {
@@ -118,6 +132,7 @@ function App() {
         method: 'DELETE',
       });
       setMessages([getWelcomeMessage()]);
+      setShowSuggestions(true);
     } catch (error) {
       console.error("Erro ao limpar histórico:", error);
     }
@@ -252,6 +267,12 @@ function App() {
         </div>
       </div>
       <ChatWindow messages={messages} isLoading={isLoading} />
+      {showSuggestions && (
+        <SuggestionChips 
+          topics={suggestionTopics} 
+          onChipClick={(topic) => handleSendMessage(topic)} 
+        />
+      )}
       <InputBar onSendMessage={handleSendMessage} isLoading={isLoading} />
     </div>
   );

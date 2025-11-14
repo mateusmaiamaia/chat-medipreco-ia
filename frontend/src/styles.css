@@ -255,3 +255,31 @@ body {
 .logout-button:hover {
   background-color: #FFF0F0;
 }
+/* --- Estilos dos Chips de Sugestão --- */
+
+.suggestion-chips-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  padding: 0px 16px 12px 16px;
+  gap: 8px;
+  background-color: var(--chat-window-bg);
+  border-top: 1px solid #eee;
+}
+
+.suggestion-chip {
+  background-color: #ffffff;
+  border: 1px solid var(--medipreco-primary-blue);
+  color: var(--medipreco-primary-blue);
+  padding: 8px 12px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.suggestion-chip:hover {
+  background-color: var(--medipreco-secondary-green);
+  border-color: var(--medipreco-secondary-green);
+  color: #ffffff;
+}
