@@ -65,7 +65,7 @@ http://localhost:5173/
 
 Após a aplicação iniciar, você verá a tela de Login. Existem duas formas de acessar o chat:
 
-### Caso 1: Acessar com Usuário de Teste (Recomendado)
+### Caso 1: Acessar com Usuário de Teste 
 
 Para facilitar a avaliação, um usuário padrão é criado automaticamente pelo servidor.
 
@@ -74,7 +74,7 @@ Para facilitar a avaliação, um usuário padrão é criado automaticamente pelo
 
 Basta inserir essas credenciais na tela de login para acessar o chat imediatamente.
 
-### Caso 2: Criar um Novo Usuário (Cadastro)
+### Caso 2: Criar um Novo Usuário 
 
 1.  Na tela de login, clique no link "Não tem uma conta? **Cadastre-se**".
 2.  Preencha seu Nome, Email e uma Senha.
