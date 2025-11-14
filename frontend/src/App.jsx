@@ -17,6 +17,7 @@ function App() {
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
 
   const getWelcomeMessage = () => {
     return { 
@@ -126,6 +127,7 @@ function App() {
   const handleAuthSubmit = async (e) => {
     e.preventDefault();
     setError("");
+    setSuccess("");
     const email = emailInput.trim().toLowerCase();
     const password = passwordInput.trim();
     const name = nameInput.trim();
@@ -161,12 +163,14 @@ function App() {
         setToken(data.token);
         setUserName(data.name);
       } else {
-        setError("Registro bem-sucedido! Por favor, faça o login.");
+        setSuccess("Registro bem-sucedido! Por favor, faça o login.");
+        setError("");
         setIsLoginView(true);
         setPasswordInput("");
       }
     } catch (err) {
       setError(err.message);
+      setSuccess("");
     }
   };
 
@@ -178,6 +182,12 @@ function App() {
     setMessages([]);
     setEmailInput("");
     setPasswordInput("");
+  };
+
+  const toggleAuthMode = () => {
+    setIsLoginView(!isLoginView);
+    setError("");
+    setSuccess("");
   };
 
   if (!token) {
@@ -213,12 +223,13 @@ function App() {
           />
           
           {error && <p className="login-error">{error}</p>}
+          {success && <p className="login-success">{success}</p>}
           
           <button type="submit" className="login-button">
             {isLoginView ? 'Entrar' : 'Registrar'}
           </button>
           
-          <p className="toggle-auth" onClick={() => { setIsLoginView(!isLoginView); setError(""); }}>
+          <p className="toggle-auth" onClick={toggleAuthMode}>
             {isLoginView ? 'Não tem uma conta? Registre-se' : 'Já tem uma conta? Faça o login'}
           </p>
         </form>

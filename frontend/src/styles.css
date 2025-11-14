@@ -11,7 +11,7 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-color: #e9ecef;
+  background-color: var(--chat-window-bg);
   height: 100vh;
   margin: 0;
 }
@@ -25,7 +25,7 @@ body {
 }
 
 /* --- Estilos do Chat --- */
-/* (Este contêiner tem um tamanho fixo, então o #root o centralizará) */
+
 .chat-container {
   width: 450px;
   height: 700px;
@@ -136,12 +136,6 @@ body {
 
 /* --- Estilos da Tela de Login --- */
 
-/* (Este contêiner não precisa de NENHUM estilo, 
-   pois o #root centraliza seu filho, o .login-form) */
-.login-container {
-}
-
-/* (Este formulário tem tamanho fixo, então o #root o centralizará) */
 .login-form {
   background-color: #ffffff;
   padding: 40px;
@@ -191,6 +185,13 @@ body {
 
 .login-error {
   color: #D32F2F;
+  font-size: 14px;
+  margin-top: -10px;
+  margin-bottom: 15px;
+}
+
+.login-success {
+  color: #2E7D32;
   font-size: 14px;
   margin-top: -10px;
   margin-bottom: 15px;
