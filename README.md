@@ -38,14 +38,14 @@ O único requisito é ter o **Docker** e o **Docker Compose** instalados.
 
 ### 2. Configuração da API Key
 
-O Docker precisa das suas chaves de API para o backend e o banco de dados funcionarem.
+O Docker precisa das suas chaves de API para o backend e para o banco de dados funcionarem.
 
-1. Crie o arquivo `.env` dentro da pasta `backend/`.  
-2. Copie o conteúdo de `backend/.env.example` para o novo arquivo.  
-3. Preencha os campos:  
-   - `GEMINI_API_KEY` → sua chave real.  
-   - `JWT_SECRET` → defina uma senha longa personalizada.  
-   - Os valores de `POSTGRES` podem permanecer os padrões.
+1.  **Crie o arquivo `.env`:** Na pasta `backend/`, crie um arquivo chamado `.env`.
+2.  **Copie o conteúdo** do arquivo `backend/.env.example` para dentro do seu novo `.env`.
+3.  **Insira suas chaves:**
+    * `GEMINI_API_KEY`: Substitua `SUA_CHAVE_AQUI` pela sua chave real. (Você pode gerar uma chave gratuita no [Google AI Studio](https://aistudio.google.com/app/apikey)).
+    * `JWT_SECRET`: Substitua `SEU_SEGREDO_JWT_AQUI` por uma senha longa que você inventar (ex: `meu-chat-secreto-123`).
+    * (Você pode deixar os valores de `POSTGRES` como estão, pois eles são para o ambiente Docker).
 
 ### 3. Rodando a Aplicação
 
@@ -61,14 +61,35 @@ Depois, acesse no navegador:
 http://localhost:5173/
 ```
 
-### 4. Usuário de Teste (Padrão)
+##  Como Usar a Aplicação
 
-Um usuário padrão é criado:
+Após a aplicação iniciar, você verá a tela de Login. Existem duas formas de acessar o chat:
 
-- **Email:** `teste@medipreco.com`  
-- **Senha:** `123`  
+### Caso 1: Acessar com Usuário de Teste (Recomendado)
 
----
+Para facilitar a avaliação, um usuário padrão é criado automaticamente pelo servidor.
+
+* **Email:** `teste@medipreco.com`
+* **Senha:** `123`
+
+Basta inserir essas credenciais na tela de login para acessar o chat imediatamente.
+
+### Caso 2: Criar um Novo Usuário (Cadastro)
+
+1.  Na tela de login, clique no link "Não tem uma conta? **Cadastre-se**".
+2.  Preencha seu Nome, Email e uma Senha.
+3.  Após o cadastro, você será redirecionado para a tela de login.
+4.  Faça o login com o email e senha que você acabou de criar.
+
+### Funcionalidades do Chat
+
+* **Histórico Persistente:** Seu histórico de chat é salvo. Se você sair e logar novamente, suas mensagens anteriores serão carregadas.
+* **Guia Inicial:** Ao logar, o bot te saúda e apresenta um chip de "Ver tópicos de ajuda" para te guiar.
+* **Resgate Inteligente:** Se você fizer uma pergunta fora do escopo, o bot irá se desculpar e mostrará o chip "Ver tópicos de ajuda" para te trazer de volta aos tópicos válidos.
+* **Novo Chat:** Limpa todo o seu histórico de mensagens e inicia uma nova conversa.
+* **Sair:** Faz o logout e te leva de volta para a tela de login.
+
+
 
 ## 🗃️ Entidades do Banco de Dados (Schema PostgreSQL)
 
