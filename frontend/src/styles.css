@@ -142,7 +142,7 @@ body {
   border-radius: 12px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
   text-align: center;
-  width: 400px;
+  width: 450px;
 }
 
 .login-logo {
@@ -153,6 +153,13 @@ body {
 .login-form h2 {
   margin-top: 0;
   color: #333;
+  margin-bottom: 12px;
+}
+
+.login-subtitle {
+  color: #666;
+  font-size: 14px;
+  margin-top: 0;
   margin-bottom: 24px;
 }
 
@@ -255,6 +262,7 @@ body {
 .logout-button:hover {
   background-color: #FFF0F0;
 }
+
 /* --- Estilos dos Chips de Sugestão --- */
 
 .suggestion-chips-container {

@@ -82,13 +82,20 @@ function App() {
         
         setMessages([...history, welcomeMsg]);
         
+        if (history.length === 0) {
+          setShowSuggestions(true);
+          setChipSetToShow(CHIP_SET_RESCUE);
+        } else {
+          setShowSuggestions(true);
+          setChipSetToShow(CHIP_SET_RESCUE);
+        }
+        
       } catch (error) {
         console.error("Erro ao carregar histórico:", error);
         setMessages([getWelcomeMessage()]);
+        setShowSuggestions(true);
+        setChipSetToShow(CHIP_SET_RESCUE);
       }
-      
-      setShowSuggestions(true);
-      setChipSetToShow(CHIP_SET_RESCUE);
       setIsLoading(false);
     };
 
@@ -176,7 +183,7 @@ function App() {
       return;
     }
     if (!isLoginView && !name) {
-      setError("O nome é obrigatório para o registro.");
+      setError("O nome é obrigatório para o cadastro.");
       return;
     }
 
@@ -202,7 +209,7 @@ function App() {
         setToken(data.token);
         setUserName(data.name);
       } else {
-        setSuccess("Registro bem-sucedido! Por favor, faça o login.");
+        setSuccess("Cadastro bem-sucedido! Por favor, faça o login.");
         setError("");
         setIsLoginView(true);
         setPasswordInput("");
@@ -239,6 +246,12 @@ function App() {
           <img src="/gradient_logo.png" alt="Logo Medipreço" className="login-logo" />
           <h2>{isLoginView ? 'Acesse seu Chat' : 'Crie sua Conta'}</h2>
           
+          <p className="login-subtitle">
+            {isLoginView 
+              ? "Faça o login para acessar seu histórico." 
+              : "Crie sua conta para começar a conversar."}
+          </p>
+          
           {!isLoginView && (
             <input
               type="text"
@@ -268,11 +281,11 @@ function App() {
           {success && <p className="login-success">{success}</p>}
           
           <button type="submit" className="login-button">
-            {isLoginView ? 'Entrar' : 'Registrar'}
+            {isLoginView ? 'Entrar' : 'Cadastrar'}
           </button>
           
           <p className="toggle-auth" onClick={toggleAuthMode}>
-            {isLoginView ? 'Não tem uma conta? Registre-se' : 'Já tem uma conta? Faça o login'}
+            {isLoginView ? 'Não tem uma conta? Cadastre-se' : 'Já tem uma conta? Faça o login'}
           </p>
         </form>
       </div>

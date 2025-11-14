@@ -20,13 +20,13 @@ router.post('/register', async (req, res) => {
       "INSERT INTO users (name, email, hashedPassword) VALUES ($1, $2, $3)",
       [name, email, hashedPassword]
     );
-    res.status(201).json({ message: "Usuário registrado com sucesso." });
+    res.status(201).json({ message: "Usuário cadastrado com sucesso." });
   } catch (err) {
     if (err.code === '23505') { 
       return res.status(409).json({ error: "Este e-mail já está em uso." });
     }
     console.error(err);
-    return res.status(500).json({ error: "Erro ao registrar usuário." });
+    return res.status(500).json({ error: "Erro ao cadastrar usuário." });
   }
 });
 
@@ -53,7 +53,7 @@ router.post('/login', async (req, res) => {
     res.status(200).json({ token: token, email: user.email, name: user.name });
   } catch (err) {
     console.error(err);
-    return res.status(500).json({ error: "Erro no servidor." });
+    return res.status(5E+2).json({ error: "Erro no servidor." });
   }
 });
 
