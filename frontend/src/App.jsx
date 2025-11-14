@@ -6,6 +6,21 @@ import SuggestionChips from './components/SuggestionChips';
 
 const API_URL = '/api';
 
+const CHIP_SET_RESCUE = ["Ver tópicos de ajuda"];
+const CHIP_SET_MAIN_TOPICS = [
+  "Planos Medipreço",
+  "Diferenciais",
+  "Dúvidas do App",
+  "Como funciona o Subsídio?",
+  "O que são Smart Lockers?",
+  "Prazos de Entrega",
+  "Pagamentos e Estornos",
+  "Regras de Receitas",
+  "Trocas e Devoluções",
+  "MediPet (Petlove)",
+  "Canais de Atendimento"
+];
+
 function App() {
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
@@ -21,11 +36,7 @@ function App() {
   const [success, setSuccess] = useState("");
   
   const [showSuggestions, setShowSuggestions] = useState(false);
-  const suggestionTopics = [
-    "Quais são os planos?", 
-    "Como funciona o subsídio?", 
-    "O que são Smart Lockers?"
-  ];
+  const [chipSetToShow, setChipSetToShow] = useState(CHIP_SET_RESCUE);
 
   const getWelcomeMessage = () => {
     return { 
@@ -70,13 +81,14 @@ function App() {
         const welcomeMsg = getWelcomeMessage();
         
         setMessages([...history, welcomeMsg]);
-        setShowSuggestions(false);
         
       } catch (error) {
         console.error("Erro ao carregar histórico:", error);
         setMessages([getWelcomeMessage()]);
-        setShowSuggestions(true);
       }
+      
+      setShowSuggestions(true);
+      setChipSetToShow(CHIP_SET_RESCUE);
       setIsLoading(false);
     };
 
@@ -86,7 +98,8 @@ function App() {
   const handleSendMessage = async (userInput) => {
     setShowSuggestions(false);
     const userMessage = { sender: 'user', text: userInput };
-    const history = messages.length > 1 ? messages.slice(1) : [];
+    
+    const history = messages;
     
     setMessages(prevMessages => [...prevMessages, userMessage]);
     setIsLoading(true);
@@ -107,7 +120,8 @@ function App() {
       const data = await response.json();
       const iaMessage = { sender: 'ia', text: data.response };
       
-      if (iaMessage.text.startsWith("Puxa, essa informação")) {
+      if (iaMessage.text.startsWith("Não entendi sua mensagem")) {
+        setChipSetToShow(CHIP_SET_RESCUE);
         setShowSuggestions(true);
       }
       
@@ -122,6 +136,15 @@ function App() {
     setIsLoading(false);
   };
   
+  const handleChipClick = (topic) => {
+    if (topic === "Ver tópicos de ajuda") {
+      setShowSuggestions(true);
+      setChipSetToShow(CHIP_SET_MAIN_TOPICS);
+    } else {
+      handleSendMessage(topic);
+    }
+  };
+
   const handleClearHistory = async () => {
     if (!window.confirm("Tem certeza que deseja criar um novo chat? Todo o seu histórico atual será apagado.")) {
       return;
@@ -132,6 +155,7 @@ function App() {
         method: 'DELETE',
       });
       setMessages([getWelcomeMessage()]);
+      setChipSetToShow(CHIP_SET_RESCUE);
       setShowSuggestions(true);
     } catch (error) {
       console.error("Erro ao limpar histórico:", error);
@@ -190,6 +214,9 @@ function App() {
   };
 
   const handleLogout = () => {
+    if (!window.confirm("Você tem certeza que quer sair?")) {
+      return;
+    }
     localStorage.removeItem('chatToken');
     localStorage.removeItem('chatUserName');
     setToken(null);
@@ -269,8 +296,8 @@ function App() {
       <ChatWindow messages={messages} isLoading={isLoading} />
       {showSuggestions && (
         <SuggestionChips 
-          topics={suggestionTopics} 
-          onChipClick={(topic) => handleSendMessage(topic)} 
+          topics={chipSetToShow} 
+          onChipClick={handleChipClick} 
         />
       )}
       <InputBar onSendMessage={handleSendMessage} isLoading={isLoading} />
