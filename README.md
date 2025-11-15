@@ -20,6 +20,7 @@ O projeto utiliza uma arquitetura React (Frontend) + Node.js (Backend) com um ba
 - **Frontend:** React (com Vite)  
 - **Backend:** Node.js (com Express)  
 - **Banco de Dados:** PostgreSQL (Postgres)  
+- **Query Builder:** Knex.js
 - **Autenticação:** JWT (JSON Web Tokens) e `bcryptjs`  
 - **Containerização:** Docker e Docker Compose  
 
