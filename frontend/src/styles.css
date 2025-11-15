@@ -136,6 +136,9 @@ body {
 
 /* --- Estilos da Tela de Login --- */
 
+.login-container {
+}
+
 .login-form {
   background-color: #ffffff;
   padding: 40px;
@@ -163,6 +166,12 @@ body {
   margin-bottom: 24px;
 }
 
+.password-wrapper {
+  position: relative;
+  width: 100%;
+  margin-bottom: 20px;
+}
+
 .login-input {
   width: 100%;
   padding: 12px 18px;
@@ -170,7 +179,20 @@ body {
   border: 1px solid #ddd;
   border-radius: 20px;
   box-sizing: border-box; 
-  margin-bottom: 20px;
+}
+
+.password-wrapper .login-input {
+  margin-bottom: 0;
+  padding-right: 45px;
+}
+
+.password-toggle-icon {
+  position: absolute;
+  top: 50%;
+  right: 18px;
+  transform: translateY(-50%);
+  color: #999;
+  cursor: pointer;
 }
 
 .login-button {
