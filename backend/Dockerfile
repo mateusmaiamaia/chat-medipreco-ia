@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["sh", "-c", "npm run db:migrate && npm run db:seed && npm run start"]
+CMD ["sh", "-c", "npm run db:migrate && npm run start"]
