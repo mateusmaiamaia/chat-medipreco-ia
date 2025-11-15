@@ -3,6 +3,7 @@ import Header from './components/Header';
 import ChatWindow from './components/ChatWindow';
 import InputBar from './components/InputBar';
 import SuggestionChips from './components/SuggestionChips';
+import { FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const API_URL = '/api';
 
@@ -32,6 +33,10 @@ function App() {
   const [nameInput, setNameInput] = useState("");
   const [emailInput, setEmailInput] = useState("");
   const [passwordInput, setPasswordInput] = useState("");
+  const [confirmPasswordInput, setConfirmPasswordInput] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
+  
   const [error, setError] = useState("");
   const [success, setSuccess] = useState("");
   
@@ -82,20 +87,13 @@ function App() {
         
         setMessages([...history, welcomeMsg]);
         
-        if (history.length === 0) {
-          setShowSuggestions(true);
-          setChipSetToShow(CHIP_SET_RESCUE);
-        } else {
-          setShowSuggestions(true);
-          setChipSetToShow(CHIP_SET_RESCUE);
-        }
-        
       } catch (error) {
         console.error("Erro ao carregar histórico:", error);
         setMessages([getWelcomeMessage()]);
-        setShowSuggestions(true);
-        setChipSetToShow(CHIP_SET_RESCUE);
       }
+      
+      setShowSuggestions(true);
+      setChipSetToShow(CHIP_SET_RESCUE);
       setIsLoading(false);
     };
 
@@ -182,9 +180,16 @@ function App() {
       setError("Email e senha são obrigatórios.");
       return;
     }
-    if (!isLoginView && !name) {
-      setError("O nome é obrigatório para o cadastro.");
-      return;
+    
+    if (!isLoginView) {
+      if (!name) {
+        setError("O nome é obrigatório para o cadastro.");
+        return;
+      }
+      if (passwordInput !== confirmPasswordInput) {
+        setError("As senhas não coincidem.");
+        return;
+      }
     }
 
     const endpoint = isLoginView ? '/auth/login' : '/auth/register';
@@ -213,6 +218,7 @@ function App() {
         setError("");
         setIsLoginView(true);
         setPasswordInput("");
+        setConfirmPasswordInput("");
       }
     } catch (err) {
       setError(err.message);
@@ -253,29 +259,54 @@ function App() {
           </p>
           
           {!isLoginView && (
-            <input
-              type="text"
-              value={nameInput}
-              onChange={(e) => setNameInput(e.target.value)}
-              placeholder="Digite seu nome"
-              className="login-input"
-            />
+            <div className="password-wrapper">
+              <input
+                type="text"
+                value={nameInput}
+                onChange={(e) => setNameInput(e.target.value)}
+                placeholder="Digite seu nome"
+                className="login-input"
+              />
+            </div>
           )}
           
-          <input
-            type="email"
-            value={emailInput}
-            onChange={(e) => setEmailInput(e.target.value)}
-            placeholder="Digite seu e-mail"
-            className="login-input"
-          />
-          <input
-            type="password"
-            value={passwordInput}
-            onChange={(e) => setPasswordInput(e.target.value)}
-            placeholder="Digite sua senha"
-            className="login-input"
-          />
+          <div className="password-wrapper">
+            <input
+              type="email"
+              value={emailInput}
+              onChange={(e) => setEmailInput(e.target.value)}
+              placeholder="Digite seu e-mail"
+              className="login-input"
+            />
+          </div>
+
+          <div className="password-wrapper">
+            <input
+              type={showPassword ? "text" : "password"}
+              value={passwordInput}
+              onChange={(e) => setPasswordInput(e.target.value)}
+              placeholder="Digite sua senha"
+              className="login-input"
+            />
+            <span className="password-toggle-icon" onClick={() => setShowPassword(!showPassword)}>
+              {showPassword ? <FaEyeSlash /> : <FaEye />}
+            </span>
+          </div>
+
+          {!isLoginView && (
+            <div className="password-wrapper">
+              <input
+                type={showConfirmPassword ? "text" : "password"}
+                value={confirmPasswordInput}
+                onChange={(e) => setConfirmPasswordInput(e.target.value)}
+                placeholder="Confirme sua senha"
+                className="login-input"
+              />
+              <span className="password-toggle-icon" onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+                {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
+              </span>
+            </div>
+          )}
           
           {error && <p className="login-error">{error}</p>}
           {success && <p className="login-success">{success}</p>}

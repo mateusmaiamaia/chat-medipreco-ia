@@ -9,4 +9,4 @@ COPY . .
 
 EXPOSE 3001
 
-CMD ["node", "server.js"]
+CMD ["sh", "-c", "npm run db:migrate && npm run start"]
